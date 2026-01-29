@@ -173,31 +173,35 @@ export function FleetMap({
           />
         )}
 
-        {/* Customer markers with geofence */}
+        {/* Customer geofences */}
         {showCustomers && customers.map((customer) => (
-          <div key={customer.id}>
-            <Circle
-              center={[customer.lat, customer.lng]}
-              radius={customer.geofence_radius_m}
-              fillColor="#3b82f6"
-              fillOpacity={0.1}
-              color="#3b82f6"
-              weight={1}
-            />
-            <Marker
-              position={[customer.lat, customer.lng]}
-              icon={createCustomerIcon()}
-            >
-              <Popup>
-                <div className="text-sm">
-                  <p className="font-semibold">{customer.name}</p>
-                  {customer.address && (
-                    <p className="text-muted-foreground text-xs">{customer.address}</p>
-                  )}
-                </div>
-              </Popup>
-            </Marker>
-          </div>
+          <Circle
+            key={`geofence-${customer.id}`}
+            center={[customer.lat, customer.lng]}
+            radius={customer.geofence_radius_m}
+            fillColor="#3b82f6"
+            fillOpacity={0.1}
+            color="#3b82f6"
+            weight={1}
+          />
+        ))}
+
+        {/* Customer markers */}
+        {showCustomers && customers.map((customer) => (
+          <Marker
+            key={`marker-${customer.id}`}
+            position={[customer.lat, customer.lng]}
+            icon={createCustomerIcon()}
+          >
+            <Popup>
+              <div className="text-sm">
+                <p className="font-semibold">{customer.name}</p>
+                {customer.address && (
+                  <p className="text-muted-foreground text-xs">{customer.address}</p>
+                )}
+              </div>
+            </Popup>
+          </Marker>
         ))}
 
         {/* Truck markers */}
