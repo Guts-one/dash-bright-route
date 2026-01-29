@@ -2,95 +2,121 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
+/* Truck Tracking Demo - Professional Logistics Design System
+   Industrial blues, safety greens, alert oranges
+   Clean, data-dense but organized
 */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Core palette - Deep navy professional */
+    --background: 220 20% 97%;
+    --foreground: 220 30% 15%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 220 30% 15%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 220 30% 15%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Primary - Deep navy blue */
+    --primary: 220 60% 25%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Secondary - Soft slate */
+    --secondary: 220 15% 92%;
+    --secondary-foreground: 220 30% 20%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 220 15% 95%;
+    --muted-foreground: 220 10% 45%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    /* Accent - Teal for status indicators */
+    --accent: 175 60% 40%;
+    --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 220 15% 88%;
+    --input: 220 15% 88%;
+    --ring: 220 60% 50%;
 
     --radius: 0.5rem;
 
-    --sidebar-background: 0 0% 98%;
+    /* Status colors - Semantic */
+    --status-en-route: 175 60% 40%;
+    --status-stopped: 35 90% 50%;
+    --status-at-customer: 145 65% 40%;
+    --status-offline: 220 10% 55%;
+    
+    /* Alert colors */
+    --alert-warning: 35 90% 50%;
+    --alert-danger: 0 72% 51%;
+    --alert-success: 145 65% 40%;
+    --alert-info: 200 80% 50%;
+    
+    /* Chart colors */
+    --chart-1: 220 60% 50%;
+    --chart-2: 175 60% 45%;
+    --chart-3: 35 85% 55%;
+    --chart-4: 280 60% 55%;
+    --chart-5: 145 65% 45%;
 
-    --sidebar-foreground: 240 5.3% 26.1%;
+    /* Sidebar */
+    --sidebar-background: 220 30% 15%;
+    --sidebar-foreground: 220 15% 85%;
+    --sidebar-primary: 175 60% 50%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 220 25% 22%;
+    --sidebar-accent-foreground: 220 15% 90%;
+    --sidebar-border: 220 25% 25%;
+    --sidebar-ring: 175 60% 50%;
 
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    /* Custom tokens for fleet UI */
+    --fleet-panel-bg: 220 20% 98%;
+    --fleet-card-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.05), 0 1px 2px -1px rgb(0 0 0 / 0.05);
+    --fleet-card-shadow-hover: 0 4px 6px -1px rgb(0 0 0 / 0.08), 0 2px 4px -2px rgb(0 0 0 / 0.05);
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+    --background: 220 30% 8%;
+    --foreground: 220 15% 92%;
 
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
+    --card: 220 25% 12%;
+    --card-foreground: 220 15% 92%;
 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 220 25% 12%;
+    --popover-foreground: 220 15% 92%;
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    --primary: 175 60% 50%;
+    --primary-foreground: 220 30% 10%;
 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 220 20% 18%;
+    --secondary-foreground: 220 15% 85%;
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --muted: 220 20% 18%;
+    --muted-foreground: 220 10% 55%;
 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 175 60% 45%;
+    --accent-foreground: 220 30% 10%;
 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 62% 45%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --border: 220 20% 20%;
+    --input: 220 20% 20%;
+    --ring: 175 60% 50%;
+
+    --sidebar-background: 220 30% 6%;
+    --sidebar-foreground: 220 15% 85%;
+    --sidebar-primary: 175 60% 50%;
+    --sidebar-primary-foreground: 220 30% 10%;
+    --sidebar-accent: 220 25% 15%;
+    --sidebar-accent-foreground: 220 15% 90%;
+    --sidebar-border: 220 25% 18%;
+    --sidebar-ring: 175 60% 50%;
+
+    --fleet-panel-bg: 220 25% 10%;
   }
 }
 
@@ -100,6 +126,161 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   }
+
+  /* Custom scrollbar for fleet panels */
+  .fleet-scrollbar::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  .fleet-scrollbar::-webkit-scrollbar-track {
+    @apply bg-muted rounded-full;
+  }
+
+  .fleet-scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-muted-foreground/30 rounded-full hover:bg-muted-foreground/50;
+  }
+}
+
+@layer components {
+  /* Status badge variants */
+  .status-badge {
+    @apply inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium;
+  }
+
+  .status-en-route {
+    @apply bg-[hsl(var(--status-en-route)/0.15)] text-[hsl(var(--status-en-route))];
+  }
+
+  .status-stopped {
+    @apply bg-[hsl(var(--status-stopped)/0.15)] text-[hsl(var(--status-stopped))];
+  }
+
+  .status-at-customer {
+    @apply bg-[hsl(var(--status-at-customer)/0.15)] text-[hsl(var(--status-at-customer))];
+  }
+
+  .status-offline {
+    @apply bg-[hsl(var(--status-offline)/0.15)] text-[hsl(var(--status-offline))];
+  }
+
+  /* Alert badges */
+  .alert-badge-warning {
+    @apply bg-[hsl(var(--alert-warning)/0.15)] text-[hsl(var(--alert-warning))] border border-[hsl(var(--alert-warning)/0.3)];
+  }
+
+  .alert-badge-danger {
+    @apply bg-[hsl(var(--alert-danger)/0.15)] text-[hsl(var(--alert-danger))] border border-[hsl(var(--alert-danger)/0.3)];
+  }
+
+  .alert-badge-success {
+    @apply bg-[hsl(var(--alert-success)/0.15)] text-[hsl(var(--alert-success))] border border-[hsl(var(--alert-success)/0.3)];
+  }
+
+  /* Fleet card styling */
+  .fleet-card {
+    @apply bg-card rounded-lg border shadow-[var(--fleet-card-shadow)] transition-shadow duration-200;
+  }
+
+  .fleet-card:hover {
+    @apply shadow-[var(--fleet-card-shadow-hover)];
+  }
+
+  /* Map marker styling */
+  .map-marker {
+    @apply w-8 h-8 rounded-full flex items-center justify-center text-white font-bold text-xs shadow-lg;
+  }
+
+  .map-marker-en-route {
+    @apply bg-[hsl(var(--status-en-route))];
+  }
+
+  .map-marker-stopped {
+    @apply bg-[hsl(var(--status-stopped))];
+  }
+
+  .map-marker-at-customer {
+    @apply bg-[hsl(var(--status-at-customer))];
+  }
+
+  /* Pulse animation for live indicators */
+  .pulse-live {
+    @apply relative;
+  }
+
+  .pulse-live::before {
+    content: '';
+    @apply absolute inset-0 rounded-full animate-ping bg-current opacity-30;
+  }
+
+  /* KPI card */
+  .kpi-card {
+    @apply fleet-card p-4 space-y-1;
+  }
+
+  .kpi-value {
+    @apply text-2xl font-bold text-foreground;
+  }
+
+  .kpi-label {
+    @apply text-sm text-muted-foreground;
+  }
+
+  /* Timeline styling */
+  .timeline-item {
+    @apply relative pl-6 pb-4 border-l-2 border-border last:border-l-transparent last:pb-0;
+  }
+
+  .timeline-dot {
+    @apply absolute left-[-5px] top-1 w-2 h-2 rounded-full bg-primary;
+  }
+
+  /* Driver mobile card */
+  .driver-stop-card {
+    @apply fleet-card p-4 flex items-center gap-4;
+  }
+
+  /* Signature canvas container */
+  .signature-container {
+    @apply border-2 border-dashed border-border rounded-lg bg-muted/50 relative overflow-hidden;
+  }
+}
+
+@layer utilities {
+  /* Animation for live data updates */
+  @keyframes flash-update {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; background-color: hsl(var(--accent) / 0.1); }
+  }
+
+  .animate-flash-update {
+    animation: flash-update 0.5s ease-in-out;
+  }
+
+  /* Smooth transitions for data changes */
+  .transition-data {
+    @apply transition-all duration-300 ease-out;
+  }
+}
+
+/* Leaflet overrides */
+.leaflet-container {
+  @apply rounded-lg font-sans;
+}
+
+.leaflet-popup-content-wrapper {
+  @apply rounded-lg shadow-lg;
+}
+
+.leaflet-popup-content {
+  @apply m-3 text-sm;
+}
+
+/* Custom truck marker */
+.truck-marker-icon {
+  background: transparent !important;
+  border: none !important;
 }
