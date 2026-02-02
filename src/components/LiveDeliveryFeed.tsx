@@ -1,6 +1,6 @@
 import { Delivery } from '@/lib/types';
 import { StatusBadge } from './StatusBadge';
-import { formatRelativeTime } from '@/lib/fleet-utils';
+import { formatIssueCategory, formatRelativeTime } from '@/lib/fleet-utils';
 import { Package, FileSignature, AlertCircle, Truck } from 'lucide-react';
 import { ScrollArea } from '@/components/ui/scroll-area';
 
@@ -24,7 +24,7 @@ export function LiveDeliveryFeed({ deliveries, maxHeight = '300px' }: LiveDelive
     return (
       <div className="text-center py-8 text-muted-foreground">
         <Package className="w-8 h-8 mx-auto mb-2 opacity-50" />
-        <p className="text-sm">No recent deliveries</p>
+        <p className="text-sm">Nenhuma entrega recente</p>
       </div>
     );
   }
@@ -44,11 +44,11 @@ export function LiveDeliveryFeed({ deliveries, maxHeight = '300px' }: LiveDelive
             <div className="flex items-start justify-between gap-2">
               <div className="flex-1 min-w-0">
                 <p className="font-medium text-sm truncate">
-                  {delivery.customer?.name || 'Unknown Customer'}
+                  {delivery.customer?.name || 'Cliente desconhecido'}
                 </p>
                 <div className="flex items-center gap-2 text-xs text-muted-foreground mt-0.5">
                   <Truck className="w-3 h-3" />
-                  <span>{delivery.truck?.name || 'Unknown'}</span>
+                  <span>{delivery.truck?.name || 'Desconhecido'}</span>
                 </div>
               </div>
               <StatusBadge status={delivery.status} type="delivery" size="sm" />
@@ -59,13 +59,13 @@ export function LiveDeliveryFeed({ deliveries, maxHeight = '300px' }: LiveDelive
               {delivery.signature_url && (
                 <span className="inline-flex items-center gap-1 text-xs text-status-at-customer bg-status-at-customer/10 px-2 py-0.5 rounded-full">
                   <FileSignature className="w-3 h-3" />
-                  Signed
+                  Assinado
                 </span>
               )}
               {delivery.issue_category && (
                 <span className="inline-flex items-center gap-1 text-xs text-destructive bg-destructive/10 px-2 py-0.5 rounded-full">
                   <AlertCircle className="w-3 h-3" />
-                  {delivery.issue_category.replace('_', ' ')}
+                  {formatIssueCategory(delivery.issue_category)}
                 </span>
               )}
             </div>

@@ -10,38 +10,38 @@ export default function TransparencyPage() {
   const trackedItems = [
     {
       icon: MapPin,
-      title: 'Real-Time Location',
-      purpose: 'Accurate ETAs & Customer Communication',
-      description: 'We track truck locations during work hours to provide customers with accurate delivery windows and to help dispatchers optimize routes.',
-      notUsedFor: 'Personal surveillance or off-hours monitoring',
+      title: 'Localizacao em tempo real',
+      purpose: 'ETAs precisos e comunicacao com clientes',
+      description: 'Monitoramos a localizacao dos caminhoes durante o horario de trabalho para oferecer janelas de entrega precisas aos clientes e ajudar a equipe de despacho a otimizar rotas.',
+      notUsedFor: 'Vigilancia pessoal ou monitoramento fora do horario',
     },
     {
       icon: Clock,
-      title: 'Route & Stop Times',
-      purpose: 'Operational Efficiency & Safety',
-      description: 'Stop durations help identify loading dock delays, traffic issues, and ensure adequate break times for driver safety and compliance.',
-      notUsedFor: 'Micromanaging or punitive measures',
+      title: 'Rota e tempos de parada',
+      purpose: 'Eficiencia operacional e seguranca',
+      description: 'Duracoes de parada ajudam a identificar atrasos em docas, problemas de transito e garantir pausas adequadas para seguranca e conformidade.',
+      notUsedFor: 'Microgestao ou medidas punitivas',
     },
     {
       icon: Fuel,
-      title: 'Fuel & Mileage',
-      purpose: 'Cost Management & Maintenance Planning',
-      description: 'Aggregate fuel data helps the company manage costs and plan for vehicle maintenance. Individual driving patterns are not analyzed.',
-      notUsedFor: 'Individual driver performance scoring',
+      title: 'Combustivel e quilometragem',
+      purpose: 'Gestao de custos e planejamento de manutencao',
+      description: 'Dados agregados de combustivel ajudam a empresa a controlar custos e planejar manutencao. Padroes individuais de conducao nao sao analisados.',
+      notUsedFor: 'Pontuacao individual de desempenho do motorista',
     },
     {
       icon: Wrench,
-      title: 'Maintenance Alerts',
-      purpose: 'Vehicle Safety & Longevity',
-      description: 'Automated alerts ensure trucks receive timely service, keeping drivers safe and preventing breakdowns.',
-      notUsedFor: 'Driver blame for maintenance issues',
+      title: 'Alertas de manutencao',
+      purpose: 'Seguranca e longevidade dos veiculos',
+      description: 'Alertas automatizados garantem manutencao no tempo certo, mantendo motoristas seguros e evitando panes.',
+      notUsedFor: 'Culpar motorista por problemas de manutencao',
     },
     {
       icon: Package,
-      title: 'Proof of Delivery',
-      purpose: 'Customer Accountability & Driver Protection',
-      description: 'Digital signatures and issue reports protect both drivers and the company in case of disputes.',
-      notUsedFor: 'Speed or efficiency quotas',
+      title: 'Comprovante de entrega',
+      purpose: 'Responsabilidade do cliente e protecao ao motorista',
+      description: 'Assinaturas digitais e relatos de problemas protegem motoristas e empresa em caso de disputas.',
+      notUsedFor: 'Metas de velocidade ou eficiencia',
     },
   ];
 
@@ -59,7 +59,7 @@ export default function TransparencyPage() {
           <Button variant="ghost" asChild>
             <Link to="/auth">
               <ArrowLeft className="w-4 h-4 mr-2" />
-              Back to Login
+              Voltar para o login
             </Link>
           </Button>
         </div>
@@ -70,13 +70,13 @@ export default function TransparencyPage() {
         <div className="container mx-auto px-4 text-center max-w-3xl">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary mb-6">
             <Eye className="w-4 h-4" />
-            <span className="text-sm font-medium">Transparency First</span>
+            <span className="text-sm font-medium">Transparencia em primeiro lugar</span>
           </div>
-          <h1 className="text-4xl font-bold mb-4">What We Track & Why</h1>
+          <h1 className="text-4xl font-bold mb-4">O que monitoramos e por que</h1>
           <p className="text-lg text-muted-foreground">
-            FleetTrack Pro is designed for operational excellence, not surveillance. 
-            We believe in full transparency about what data is collected and how it's used 
-            to support our team's success.
+            FleetTrack Pro foi criado para excelencia operacional, nao para vigilancia.
+            Acreditamos em transparencia total sobre quais dados sao coletados e como sao usados
+            para apoiar o sucesso da equipe.
           </p>
         </div>
       </section>
@@ -103,7 +103,7 @@ export default function TransparencyPage() {
                   <div className="flex items-start gap-2 p-3 rounded-lg bg-destructive/5 border border-destructive/10">
                     <XCircle className="w-4 h-4 text-destructive shrink-0 mt-0.5" />
                     <div>
-                      <p className="text-xs font-medium text-destructive">Not used for:</p>
+                      <p className="text-xs font-medium text-destructive">Nao usado para:</p>
                       <p className="text-xs text-muted-foreground">{item.notUsedFor}</p>
                     </div>
                   </div>
@@ -117,7 +117,7 @@ export default function TransparencyPage() {
       {/* Commitments */}
       <section className="py-12 bg-muted/50">
         <div className="container mx-auto px-4 max-w-4xl">
-          <h2 className="text-2xl font-bold text-center mb-8">Our Commitments</h2>
+          <h2 className="text-2xl font-bold text-center mb-8">Nossos compromissos</h2>
           
           <div className="grid md:grid-cols-2 gap-6">
             <Card className="border-status-at-customer/30 bg-status-at-customer/5">
@@ -125,10 +125,10 @@ export default function TransparencyPage() {
                 <div className="flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 text-status-at-customer shrink-0 mt-0.5" />
                   <div>
-                    <h3 className="font-semibold mb-1">Work Hours Only</h3>
+                    <h3 className="font-semibold mb-1">Apenas horario de trabalho</h3>
                     <p className="text-sm text-muted-foreground">
-                      Tracking is only active during scheduled work hours. 
-                      Off-duty time is private and never monitored.
+                      O monitoramento fica ativo apenas durante o horario de trabalho.
+                      O tempo fora de servico e privado e nunca e monitorado.
                     </p>
                   </div>
                 </div>
@@ -140,10 +140,10 @@ export default function TransparencyPage() {
                 <div className="flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 text-status-at-customer shrink-0 mt-0.5" />
                   <div>
-                    <h3 className="font-semibold mb-1">Data Minimization</h3>
+                    <h3 className="font-semibold mb-1">Minimizacao de dados</h3>
                     <p className="text-sm text-muted-foreground">
-                      We only collect what's necessary for operations. 
-                      No cameras, no audio recording, no personal device tracking.
+                      Coletamos apenas o necessario para operacoes.
+                      Sem cameras, sem gravacao de audio, sem rastreamento de dispositivos pessoais.
                     </p>
                   </div>
                 </div>
@@ -155,10 +155,10 @@ export default function TransparencyPage() {
                 <div className="flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 text-status-at-customer shrink-0 mt-0.5" />
                   <div>
-                    <h3 className="font-semibold mb-1">Aggregate Reporting</h3>
+                    <h3 className="font-semibold mb-1">Relatorios agregados</h3>
                     <p className="text-sm text-muted-foreground">
-                      Reports focus on fleet-wide trends, not individual driver rankings. 
-                      Data supports the team, not competition.
+                      Relatorios focam em tendencias da frota, nao em rankings individuais.
+                      Os dados apoiam a equipe, nao a competicao.
                     </p>
                   </div>
                 </div>
@@ -170,10 +170,10 @@ export default function TransparencyPage() {
                 <div className="flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 text-status-at-customer shrink-0 mt-0.5" />
                   <div>
-                    <h3 className="font-semibold mb-1">Driver Access</h3>
+                    <h3 className="font-semibold mb-1">Acesso do motorista</h3>
                     <p className="text-sm text-muted-foreground">
-                      Drivers can view their own data anytime. 
-                      Full transparency means you always know what we know.
+                      Motoristas podem ver seus proprios dados a qualquer momento.
+                      Transparencia total significa que voce sempre sabe o que sabemos.
                     </p>
                   </div>
                 </div>
@@ -187,15 +187,15 @@ export default function TransparencyPage() {
       <section className="py-12">
         <div className="container mx-auto px-4 max-w-3xl text-center">
           <Shield className="w-12 h-12 mx-auto mb-4 text-primary" />
-          <h2 className="text-2xl font-bold mb-4">Data Retention Policy</h2>
+          <h2 className="text-2xl font-bold mb-4">Politica de retencao de dados</h2>
           <p className="text-muted-foreground mb-6">
-            GPS and route data is retained for <strong>90 days</strong> for operational purposes, 
-            then automatically deleted. Delivery records are kept for 
-            <strong> 2 years</strong> for compliance and dispute resolution.
+            Dados de GPS e rota sao mantidos por <strong>90 dias</strong> para operacao,
+            depois sao apagados automaticamente. Registros de entrega sao mantidos por
+            <strong> 2 anos</strong> para conformidade e resolucao de disputas.
           </p>
           <p className="text-sm text-muted-foreground italic">
-            Note: This is a demo application. In production, consult with legal and union 
-            representatives to establish appropriate data governance policies.
+            Nota: Este e um aplicativo de demonstracao. Em producao, consulte representantes legais e sindicais
+            para definir politicas adequadas de governanca de dados.
           </p>
         </div>
       </section>
@@ -203,9 +203,9 @@ export default function TransparencyPage() {
       {/* Footer */}
       <footer className="py-8 border-t">
         <div className="container mx-auto px-4 text-center text-sm text-muted-foreground">
-          <p>Questions about our tracking practices?</p>
+          <p>Duvidas sobre nossas praticas de monitoramento?</p>
           <p className="mt-1">
-            Contact your fleet manager or HR representative for more information.
+            Fale com seu gerente de frota ou com o RH para mais informacoes.
           </p>
         </div>
       </footer>

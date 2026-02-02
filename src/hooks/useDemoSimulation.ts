@@ -1,7 +1,7 @@
 import { useState, useRef, useCallback } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { useQueryClient } from '@tanstack/react-query';
-import { generateRandomCoordinate, moveTowards, calculateDistance } from '@/lib/fleet-utils';
+import { formatMaintenanceType, generateRandomCoordinate, moveTowards, calculateDistance } from '@/lib/fleet-utils';
 import { Truck, Customer, Route, Checkpoint } from '@/lib/types';
 import { toast } from 'sonner';
 
@@ -68,7 +68,7 @@ export function useDemoSimulation() {
         truck_id: truck.id,
         route_id: route.id,
         max_distance_m: 750 + Math.random() * 500,
-        notes: 'Simulated route deviation detected',
+        notes: 'Desvio de rota simulado detectado',
       })
       .select()
       .single();
@@ -108,13 +108,13 @@ export function useDemoSimulation() {
           .from('maintenance_alerts')
           .update({
             severity: 'overdue',
-            message: `OVERDUE: ${rule.type} service required for ${truck.name}`,
+            message: `ATRASADO: manutencao de ${formatMaintenanceType(rule.type)} necessaria para ${truck.name}`,
           })
           .eq('id', existingAlert.id);
         
         addLog(`🔴 Maintenance alert escalated to OVERDUE for ${truck.name}`);
-        toast.error(`Maintenance Overdue: ${truck.name}`, {
-          description: `${rule.type} service is now overdue`,
+        toast.error(`Manutencao atrasada: ${truck.name}`, {
+          description: `Manutencao de ${formatMaintenanceType(rule.type)} agora esta atrasada`,
         });
       }
     } else {
@@ -125,12 +125,12 @@ export function useDemoSimulation() {
           truck_id: truck.id,
           rule_id: rule.id,
           severity: 'due_soon',
-          message: `${rule.type} service due soon for ${truck.name}`,
+          message: `Manutencao de ${formatMaintenanceType(rule.type)} vence em breve para ${truck.name}`,
         });
       
       addLog(`🟡 Maintenance alert created for ${truck.name}`);
-      toast.warning(`Maintenance Due: ${truck.name}`, {
-        description: `${rule.type} service is due soon`,
+      toast.warning(`Manutencao a vencer: ${truck.name}`, {
+        description: `Manutencao de ${formatMaintenanceType(rule.type)} vence em breve`,
       });
     }
   }, [addLog]);

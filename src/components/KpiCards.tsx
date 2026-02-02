@@ -8,28 +8,28 @@ interface KpiCardsProps {
 export function KpiCards({ stats }: KpiCardsProps) {
   const cards = [
     {
-      label: 'Total Fleet',
+      label: 'Frota total',
       value: stats.totalTrucks,
       icon: Truck,
       color: 'text-primary',
       bg: 'bg-primary/10',
     },
     {
-      label: 'En Route',
+      label: 'Em rota',
       value: stats.enRoute,
       icon: Navigation,
       color: 'text-status-en-route',
       bg: 'bg-status-en-route/10',
     },
     {
-      label: 'At Customer',
+      label: 'No cliente',
       value: stats.atCustomer,
       icon: MapPin,
       color: 'text-status-at-customer',
       bg: 'bg-status-at-customer/10',
     },
     {
-      label: 'Stopped',
+      label: 'Parado',
       value: stats.stopped,
       icon: Square,
       color: 'text-status-stopped',
@@ -43,21 +43,21 @@ export function KpiCards({ stats }: KpiCardsProps) {
       bg: 'bg-status-offline/10',
     },
     {
-      label: 'Maintenance Alerts',
+      label: 'Alertas de manutencao',
       value: stats.maintenanceAlerts,
       icon: AlertTriangle,
       color: stats.maintenanceAlerts > 0 ? 'text-alert-warning' : 'text-muted-foreground',
       bg: stats.maintenanceAlerts > 0 ? 'bg-alert-warning/10' : 'bg-muted',
     },
     {
-      label: 'Pending Deliveries',
+      label: 'Entregas pendentes',
       value: stats.pendingDeliveries,
       icon: Package,
       color: 'text-primary',
       bg: 'bg-primary/10',
     },
     {
-      label: 'Completed Today',
+      label: 'Concluidas hoje',
       value: stats.completedToday,
       icon: CheckCircle,
       color: 'text-status-at-customer',
