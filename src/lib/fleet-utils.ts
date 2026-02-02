@@ -1,4 +1,4 @@
-import { Truck, Customer, Checkpoint, TruckStatus } from './types';
+import { Truck, Customer, Checkpoint, TruckStatus, IssueCategory, MaintenanceType } from './types';
 
 // Calculate distance between two points in meters (Haversine formula)
 export function calculateDistance(
@@ -179,21 +179,21 @@ export function formatRelativeTime(dateString: string): string {
   const diffHours = Math.floor(diffMinutes / 60);
   const diffDays = Math.floor(diffHours / 24);
 
-  if (diffMinutes < 1) return 'Just now';
-  if (diffMinutes < 60) return `${diffMinutes}m ago`;
-  if (diffHours < 24) return `${diffHours}h ago`;
-  return `${diffDays}d ago`;
+  if (diffMinutes < 1) return 'Agora mesmo';
+  if (diffMinutes < 60) return `ha ${diffMinutes} min`;
+  if (diffHours < 24) return `ha ${diffHours} h`;
+  return `ha ${diffDays} d`;
 }
 
 // Format status for display
 export function formatStatus(status: TruckStatus): string {
   switch (status) {
     case 'en_route':
-      return 'En Route';
+      return 'Em rota';
     case 'stopped':
-      return 'Stopped';
+      return 'Parado';
     case 'at_customer':
-      return 'At Customer';
+      return 'No cliente';
     case 'offline':
       return 'Offline';
     default:
@@ -215,6 +215,38 @@ export function getStatusClass(status: TruckStatus): string {
     default:
       return '';
   }
+}
+
+const issueCategoryLabels: Record<IssueCategory, string> = {
+  damage: 'dano',
+  refused: 'cliente recusou',
+  missing_items: 'itens faltando',
+  other: 'outro',
+};
+
+export function formatIssueCategory(category?: IssueCategory | string | null): string {
+  if (!category) return 'outro';
+  if ((category as IssueCategory) in issueCategoryLabels) {
+    return issueCategoryLabels[category as IssueCategory];
+  }
+  return String(category).replace(/_/g, ' ');
+}
+
+const maintenanceTypeLabels: Record<MaintenanceType, string> = {
+  oil: 'oleo',
+  tires: 'pneus',
+  inspection: 'inspecao',
+  brakes: 'freios',
+  filters: 'filtros',
+  transmission: 'transmissao',
+};
+
+export function formatMaintenanceType(type?: MaintenanceType | string | null): string {
+  if (!type) return 'manutencao';
+  if ((type as MaintenanceType) in maintenanceTypeLabels) {
+    return maintenanceTypeLabels[type as MaintenanceType];
+  }
+  return String(type);
 }
 
 // Generate random coordinates near a center point

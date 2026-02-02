@@ -1,6 +1,6 @@
 import { MaintenanceAlert } from '@/lib/types';
 import { StatusBadge } from './StatusBadge';
-import { formatRelativeTime } from '@/lib/fleet-utils';
+import { formatMaintenanceType, formatRelativeTime } from '@/lib/fleet-utils';
 import { Wrench, Gauge, Calendar, AlertTriangle } from 'lucide-react';
 import { ScrollArea } from '@/components/ui/scroll-area';
 
@@ -23,7 +23,7 @@ export function MaintenanceAlertsList({ alerts, maxHeight = '300px' }: Maintenan
     return (
       <div className="text-center py-8 text-muted-foreground">
         <Wrench className="w-8 h-8 mx-auto mb-2 opacity-50" />
-        <p className="text-sm">No maintenance alerts</p>
+        <p className="text-sm">Nenhum alerta de manutencao</p>
       </div>
     );
   }
@@ -49,15 +49,15 @@ export function MaintenanceAlertsList({ alerts, maxHeight = '300px' }: Maintenan
           >
             <div className="flex items-start justify-between gap-2">
               <div className="flex items-center gap-2">
-                <span className="text-lg" role="img" aria-label={alert.rule?.type}>
+                <span className="text-lg" role="img" aria-label={formatMaintenanceType(alert.rule?.type)}>
                   {typeIcons[alert.rule?.type || 'inspection']}
                 </span>
                 <div>
                   <p className="font-medium text-sm">
-                    {alert.truck?.name || 'Unknown Truck'}
+                    {alert.truck?.name || 'Caminhao desconhecido'}
                   </p>
                   <p className="text-xs text-muted-foreground capitalize">
-                    {alert.rule?.type} Service
+                    Servico de {formatMaintenanceType(alert.rule?.type)}
                   </p>
                 </div>
               </div>
@@ -74,7 +74,7 @@ export function MaintenanceAlertsList({ alerts, maxHeight = '300px' }: Maintenan
               {alert.rule && (
                 <span className="flex items-center gap-1">
                   <Gauge className="w-3 h-3" />
-                  Every {alert.rule.interval_km.toLocaleString()} km
+                  A cada {alert.rule.interval_km.toLocaleString()} km
                 </span>
               )}
             </div>

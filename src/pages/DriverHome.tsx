@@ -56,9 +56,9 @@ export default function DriverHome() {
         id: delivery.id,
         updates: { status: 'in_progress' }
       });
-      toast.success('Marked as arrived');
+      toast.success('Marcado como chegou');
     } catch (error) {
-      toast.error('Failed to update status');
+      toast.error('Falha ao atualizar status');
     }
   };
 
@@ -81,12 +81,12 @@ export default function DriverHome() {
 
     // Validate
     if (!hasIssue && signatureRef.current?.isEmpty()) {
-      toast.error('Please capture a signature');
+      toast.error('Por favor, capture uma assinatura');
       return;
     }
 
     if (hasIssue && !issueCategory) {
-      toast.error('Please select an issue category');
+      toast.error('Selecione uma categoria de problema');
       return;
     }
 
@@ -124,7 +124,7 @@ export default function DriverHome() {
       // Handle offline mode
       if (isOffline) {
         setPendingSync(prev => [...prev, selectedDelivery.id]);
-        toast.info('Saved offline', { description: 'Will sync when back online' });
+        toast.info('Salvo offline', { description: 'Sincronizara quando voltar online' });
         setShowCompleteDialog(false);
         return;
       }
@@ -140,12 +140,12 @@ export default function DriverHome() {
         }
       });
 
-      toast.success(hasIssue ? 'Issue reported' : 'Delivery completed!');
+      toast.success(hasIssue ? 'Problema relatado' : 'Entrega concluida!');
       setShowCompleteDialog(false);
       refetch();
     } catch (error) {
       console.error('Error completing delivery:', error);
-      toast.error('Failed to complete delivery');
+      toast.error('Falha ao concluir entrega');
     }
   };
 
@@ -157,10 +157,10 @@ export default function DriverHome() {
         id: selectedDelivery.id,
         updates: { delay_reason: delayReason }
       });
-      toast.success('Delay reason added');
+      toast.success('Motivo de atraso adicionado');
       setShowDelayDialog(false);
     } catch (error) {
-      toast.error('Failed to add delay reason');
+      toast.error('Falha ao adicionar motivo de atraso');
     }
   };
 
@@ -168,11 +168,11 @@ export default function DriverHome() {
   const handleToggleOffline = (offline: boolean) => {
     setIsOffline(offline);
     if (!offline && pendingSync.length > 0) {
-      toast.info(`Syncing ${pendingSync.length} pending deliveries...`);
+      toast.info(`Sincronizando ${pendingSync.length} entregas pendentes...`);
       // In a real app, we'd sync the pending items here
       setTimeout(() => {
         setPendingSync([]);
-        toast.success('All items synced!');
+        toast.success('Todos os itens sincronizados!');
         refetch();
       }, 2000);
     }
@@ -192,7 +192,7 @@ export default function DriverHome() {
             </div>
             <div>
               <h1 className="font-bold text-sm">FleetTrack Pro</h1>
-              <p className="text-xs text-muted-foreground">Driver View</p>
+              <p className="text-xs text-muted-foreground">Visao do motorista</p>
             </div>
           </div>
 
@@ -207,7 +207,7 @@ export default function DriverHome() {
               <Switch
                 checked={isOffline}
                 onCheckedChange={handleToggleOffline}
-                aria-label="Toggle offline mode"
+                aria-label="Alternar modo offline"
               />
             </div>
 
@@ -222,7 +222,7 @@ export default function DriverHome() {
         {/* Welcome + Truck Info */}
         <div className="flex items-center justify-between">
           <div>
-            <h2 className="text-lg font-semibold">Hello, {profile?.name?.split(' ')[0]}!</h2>
+            <h2 className="text-lg font-semibold">Ola, {profile?.name?.split(' ')[0]}!</h2>
             {myTruck && (
               <p className="text-sm text-muted-foreground">
                 {myTruck.name} • {myTruck.plate}
@@ -231,7 +231,7 @@ export default function DriverHome() {
           </div>
           <div className="text-right">
             <p className="text-2xl font-bold">{completedCount}/{totalCount}</p>
-            <p className="text-xs text-muted-foreground">Completed</p>
+            <p className="text-xs text-muted-foreground">Concluidas</p>
           </div>
         </div>
 
@@ -239,7 +239,7 @@ export default function DriverHome() {
         {pendingSync.length > 0 && (
           <div className="flex items-center gap-2 p-3 rounded-lg bg-alert-warning/10 border border-alert-warning/30 text-sm">
             <WifiOff className="w-4 h-4 text-alert-warning" />
-            <span>{pendingSync.length} delivery(ies) pending sync</span>
+            <span>{pendingSync.length} entrega(s) pendente(s) para sincronizar</span>
           </div>
         )}
 
@@ -248,12 +248,12 @@ export default function DriverHome() {
           <CardHeader className="pb-2">
             <CardTitle className="text-base flex items-center gap-2">
               <Package className="w-4 h-4 text-primary" />
-              Today's Route
+              Rota de hoje
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-3">
             {isLoading ? (
-              <p className="text-center py-8 text-muted-foreground">Loading...</p>
+              <p className="text-center py-8 text-muted-foreground">Carregando...</p>
             ) : deliveries && deliveries.length > 0 ? (
               deliveries.map((delivery) => (
                 <div
@@ -275,7 +275,7 @@ export default function DriverHome() {
                   <div className="flex-1 min-w-0">
                     <p className="font-medium truncate">{delivery.customer?.name}</p>
                     <p className="text-xs text-muted-foreground truncate">
-                      {delivery.customer?.address || 'Address not available'}
+                      {delivery.customer?.address || 'Endereco nao disponivel'}
                     </p>
                   </div>
 
@@ -284,7 +284,7 @@ export default function DriverHome() {
                     
                     {delivery.status === 'pending' && (
                       <Button size="sm" onClick={() => handleArrived(delivery)}>
-                        Arrived
+                        Cheguei
                       </Button>
                     )}
                     
@@ -294,7 +294,7 @@ export default function DriverHome() {
                           <Clock className="w-3 h-3" />
                         </Button>
                         <Button size="sm" onClick={() => openCompleteDialog(delivery)}>
-                          Complete
+                          Concluir
                         </Button>
                       </div>
                     )}
@@ -308,7 +308,7 @@ export default function DriverHome() {
             ) : (
               <div className="text-center py-8 text-muted-foreground">
                 <Package className="w-8 h-8 mx-auto mb-2 opacity-50" />
-                <p>No deliveries scheduled for today</p>
+                <p>Nenhuma entrega programada para hoje</p>
               </div>
             )}
           </CardContent>
@@ -321,7 +321,7 @@ export default function DriverHome() {
         >
           <div className="flex items-center gap-3">
             <Eye className="w-5 h-5 text-primary" />
-            <span className="font-medium">What We Track & Why</span>
+            <span className="font-medium">O que monitoramos e por que</span>
           </div>
           <ChevronRight className="w-5 h-5 text-muted-foreground" />
         </Link>
@@ -331,12 +331,12 @@ export default function DriverHome() {
       <Dialog open={showCompleteDialog} onOpenChange={setShowCompleteDialog}>
         <DialogContent className="max-w-md">
           <DialogHeader>
-            <DialogTitle>Complete Delivery</DialogTitle>
+            <DialogTitle>Concluir entrega</DialogTitle>
           </DialogHeader>
 
           <div className="space-y-4">
             <div className="flex items-center justify-between">
-              <Label htmlFor="has-issue">Report an issue?</Label>
+              <Label htmlFor="has-issue">Relatar um problema?</Label>
               <Switch
                 id="has-issue"
                 checked={hasIssue}
@@ -347,32 +347,32 @@ export default function DriverHome() {
             {hasIssue ? (
               <>
                 <div className="space-y-2">
-                  <Label>Issue Category</Label>
+                  <Label>Categoria do problema</Label>
                   <Select value={issueCategory} onValueChange={(v) => setIssueCategory(v as IssueCategory)}>
                     <SelectTrigger>
-                      <SelectValue placeholder="Select issue type" />
+                      <SelectValue placeholder="Selecione o tipo de problema" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="damage">Damage</SelectItem>
-                      <SelectItem value="refused">Customer Refused</SelectItem>
-                      <SelectItem value="missing_items">Missing Items</SelectItem>
-                      <SelectItem value="other">Other</SelectItem>
+                      <SelectItem value="damage">Dano</SelectItem>
+                      <SelectItem value="refused">Cliente recusou</SelectItem>
+                      <SelectItem value="missing_items">Itens faltando</SelectItem>
+                      <SelectItem value="other">Outro</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
                 <div className="space-y-2">
-                  <Label>Notes</Label>
+                  <Label>Observacoes</Label>
                   <Textarea
                     value={issueNotes}
                     onChange={(e) => setIssueNotes(e.target.value)}
-                    placeholder="Describe the issue..."
+                    placeholder="Descreva o problema..."
                     rows={3}
                   />
                 </div>
               </>
             ) : (
               <div className="space-y-2">
-                <Label>Customer Signature</Label>
+                <Label>Assinatura do cliente</Label>
                 <SignatureCanvas ref={signatureRef} />
               </div>
             )}
@@ -380,10 +380,10 @@ export default function DriverHome() {
 
           <DialogFooter>
             <Button variant="outline" onClick={() => setShowCompleteDialog(false)}>
-              Cancel
+              Cancelar
             </Button>
             <Button onClick={handleCompleteDelivery} disabled={updateDelivery.isPending}>
-              {hasIssue ? 'Report Issue' : 'Complete Delivery'}
+              {hasIssue ? 'Relatar problema' : 'Concluir entrega'}
             </Button>
           </DialogFooter>
         </DialogContent>
@@ -393,31 +393,31 @@ export default function DriverHome() {
       <Dialog open={showDelayDialog} onOpenChange={setShowDelayDialog}>
         <DialogContent className="max-w-md">
           <DialogHeader>
-            <DialogTitle>Add Delay Reason</DialogTitle>
+            <DialogTitle>Adicionar motivo do atraso</DialogTitle>
           </DialogHeader>
 
           <div className="space-y-2">
-            <Label>Reason</Label>
+            <Label>Motivo</Label>
             <Select value={delayReason} onValueChange={(v) => setDelayReason(v as DelayReason)}>
               <SelectTrigger>
-                <SelectValue placeholder="Select reason" />
+                <SelectValue placeholder="Selecione o motivo" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="traffic">Traffic</SelectItem>
-                <SelectItem value="queue">Queue at Customer</SelectItem>
-                <SelectItem value="loading">Loading/Unloading</SelectItem>
-                <SelectItem value="roadwork">Roadwork</SelectItem>
-                <SelectItem value="other">Other</SelectItem>
+                <SelectItem value="traffic">Transito</SelectItem>
+                <SelectItem value="queue">Fila no cliente</SelectItem>
+                <SelectItem value="loading">Carga/descarga</SelectItem>
+                <SelectItem value="roadwork">Obra na via</SelectItem>
+                <SelectItem value="other">Outro</SelectItem>
               </SelectContent>
             </Select>
           </div>
 
           <DialogFooter>
             <Button variant="outline" onClick={() => setShowDelayDialog(false)}>
-              Cancel
+              Cancelar
             </Button>
             <Button onClick={handleAddDelay} disabled={!delayReason || updateDelivery.isPending}>
-              Add Delay
+              Adicionar atraso
             </Button>
           </DialogFooter>
         </DialogContent>

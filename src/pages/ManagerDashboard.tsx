@@ -62,7 +62,7 @@ export default function ManagerDashboard() {
             </div>
             <div>
               <h1 className="font-bold">FleetTrack Pro</h1>
-              <p className="text-xs text-muted-foreground">Manager Dashboard</p>
+              <p className="text-xs text-muted-foreground">Painel do gerente</p>
             </div>
           </div>
 
@@ -72,12 +72,12 @@ export default function ManagerDashboard() {
               {!simState.isRunning ? (
                 <Button onClick={startSimulation} size="sm" className="gap-2">
                   <Play className="w-4 h-4" />
-                  Start Demo Simulation
+                  Iniciar simulacao demo
                 </Button>
               ) : (
                 <Button onClick={stopSimulation} variant="secondary" size="sm" className="gap-2">
                   <Pause className="w-4 h-4" />
-                  Stop ({simState.currentStep + 1}/{simState.totalSteps})
+                  Parar ({simState.currentStep + 1}/{simState.totalSteps})
                 </Button>
               )}
             </div>
@@ -85,7 +85,7 @@ export default function ManagerDashboard() {
             <Button variant="ghost" size="sm" asChild>
               <Link to="/transparency" className="gap-2">
                 <Eye className="w-4 h-4" />
-                Transparency
+                Transparencia
               </Link>
             </Button>
 
@@ -121,11 +121,11 @@ export default function ManagerDashboard() {
             <div className="fleet-card p-4">
               <h2 className="font-semibold mb-3 flex items-center gap-2">
                 <MapPin className="w-4 h-4 text-primary" />
-                Fleet Map
+                Mapa da frota
                 {simState.isRunning && (
                   <span className="ml-auto inline-flex items-center gap-1.5 text-xs text-accent">
                     <span className="w-2 h-2 bg-accent rounded-full animate-pulse" />
-                    Live
+                    Ao vivo
                   </span>
                 )}
               </h2>
@@ -146,7 +146,7 @@ export default function ManagerDashboard() {
             <div>
               <h2 className="font-semibold mb-3 flex items-center gap-2">
                 <Truck className="w-4 h-4 text-primary" />
-                Fleet Overview
+                Visao geral da frota
               </h2>
               {trucksLoading ? (
                 <Skeleton className="h-[300px]" />
@@ -168,7 +168,7 @@ export default function ManagerDashboard() {
               <div className="fleet-card p-4">
                 <h3 className="font-semibold mb-3 flex items-center gap-2">
                   <Zap className="w-4 h-4 text-accent" />
-                  Simulation Log
+                  Registro da simulacao
                 </h3>
                 <ScrollArea className="h-32 fleet-scrollbar">
                   <div className="space-y-1 text-xs font-mono">
@@ -184,7 +184,7 @@ export default function ManagerDashboard() {
             <div className="fleet-card p-4">
               <h3 className="font-semibold mb-3 flex items-center gap-2">
                 <AlertTriangle className="w-4 h-4 text-alert-warning" />
-                Maintenance Alerts
+                Alertas de manutencao
                 {maintenanceAlerts && maintenanceAlerts.length > 0 && (
                   <span className="ml-auto px-2 py-0.5 bg-alert-warning/10 text-alert-warning rounded-full text-xs">
                     {maintenanceAlerts.length}
@@ -198,7 +198,7 @@ export default function ManagerDashboard() {
             <div className="fleet-card p-4">
               <h3 className="font-semibold mb-3 flex items-center gap-2">
                 <Package className="w-4 h-4 text-status-at-customer" />
-                Live Delivery Feed
+                Feed de entregas ao vivo
               </h3>
               <LiveDeliveryFeed deliveries={deliveries || []} maxHeight="300px" />
             </div>

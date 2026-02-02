@@ -54,12 +54,12 @@ export const SignatureCanvas = forwardRef<SignatureCanvasRef, SignatureCanvasPro
               className="h-8 px-2"
             >
               <Eraser className="w-4 h-4 mr-1" />
-              Clear
+              Limpar
             </Button>
           </div>
         </div>
         <p className="text-xs text-muted-foreground mt-2 text-center">
-          Sign above to confirm delivery
+          Assine acima para confirmar a entrega
         </p>
       </div>
     );

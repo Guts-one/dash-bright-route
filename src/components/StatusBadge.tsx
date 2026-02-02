@@ -22,19 +22,19 @@ export function StatusBadge({
       switch (status as TruckStatus) {
         case 'en_route':
           return { 
-            label: 'En Route', 
+            label: 'Em rota', 
             icon: Truck, 
             class: 'status-en-route' 
           };
         case 'stopped':
           return { 
-            label: 'Stopped', 
+            label: 'Parado', 
             icon: Square, 
             class: 'status-stopped' 
           };
         case 'at_customer':
           return { 
-            label: 'At Customer', 
+            label: 'No cliente', 
             icon: MapPin, 
             class: 'status-at-customer' 
           };
@@ -51,25 +51,25 @@ export function StatusBadge({
       switch (status as DeliveryStatus) {
         case 'pending':
           return { 
-            label: 'Pending', 
+            label: 'Pendente', 
             icon: Clock, 
             class: 'bg-muted text-muted-foreground' 
           };
         case 'in_progress':
           return { 
-            label: 'In Progress', 
+            label: 'Em andamento', 
             icon: Package, 
             class: 'status-en-route' 
           };
         case 'completed':
           return { 
-            label: 'Completed', 
+            label: 'Concluida', 
             icon: CheckCircle, 
             class: 'status-at-customer' 
           };
         case 'failed':
           return { 
-            label: 'Issue', 
+            label: 'Problema', 
             icon: XCircle, 
             class: 'alert-badge-danger' 
           };
@@ -80,13 +80,13 @@ export function StatusBadge({
       switch (status as AlertSeverity) {
         case 'due_soon':
           return { 
-            label: 'Due Soon', 
+            label: 'Vence em breve', 
             icon: Clock, 
             class: 'alert-badge-warning' 
           };
         case 'overdue':
           return { 
-            label: 'Overdue', 
+            label: 'Atrasado', 
             icon: AlertTriangle, 
             class: 'alert-badge-danger' 
           };

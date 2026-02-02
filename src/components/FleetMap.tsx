@@ -227,11 +227,11 @@ export function FleetMap({
                     <StatusBadge status={truck.status || 'offline'} type="truck" size="sm" />
                   </div>
                   <div className="text-xs space-y-1 text-muted-foreground">
-                    <p>Plate: {truck.plate}</p>
-                    {truck.driver_name && <p>Driver: {truck.driver_name}</p>}
-                    {truck.last_speed !== undefined && <p>Speed: {Math.round(truck.last_speed)} km/h</p>}
+                    <p>Placa: {truck.plate}</p>
+                    {truck.driver_name && <p>Motorista: {truck.driver_name}</p>}
+                    {truck.last_speed !== undefined && <p>Velocidade: {Math.round(truck.last_speed)} km/h</p>}
                     {truck.last_update_ts && (
-                      <p>Updated: {formatRelativeTime(truck.last_update_ts)}</p>
+                      <p>Atualizado: {formatRelativeTime(truck.last_update_ts)}</p>
                     )}
                   </div>
                 </div>

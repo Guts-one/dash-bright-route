@@ -12,12 +12,12 @@ import { toast } from 'sonner';
 import { z } from 'zod';
 
 const loginSchema = z.object({
-  email: z.string().email('Invalid email address'),
-  password: z.string().min(6, 'Password must be at least 6 characters'),
+  email: z.string().email('Email invalido'),
+  password: z.string().min(6, 'A senha deve ter pelo menos 6 caracteres'),
 });
 
 const signupSchema = loginSchema.extend({
-  name: z.string().min(2, 'Name must be at least 2 characters'),
+  name: z.string().min(2, 'O nome deve ter pelo menos 2 caracteres'),
   role: z.enum(['manager', 'driver']),
 });
 
@@ -38,9 +38,9 @@ export default function AuthPage() {
 
   // Demo accounts info
   const demoAccounts = [
-    { email: 'manager@demo.com', password: 'demo1234', role: 'Manager' },
-    { email: 'driver1@demo.com', password: 'demo1234', role: 'Driver' },
-    { email: 'driver2@demo.com', password: 'demo1234', role: 'Driver' },
+    { email: 'manager@demo.com', password: 'demo1234', role: 'Gerente' },
+    { email: 'driver1@demo.com', password: 'demo1234', role: 'Motorista' },
+    { email: 'driver2@demo.com', password: 'demo1234', role: 'Motorista' },
   ];
 
   const handleLogin = async (e: React.FormEvent) => {
@@ -48,7 +48,7 @@ export default function AuthPage() {
     
     const validation = loginSchema.safeParse({ email: loginEmail, password: loginPassword });
     if (!validation.success) {
-      toast.error('Validation Error', { description: validation.error.errors[0].message });
+      toast.error('Erro de validacao', { description: validation.error.errors[0].message });
       return;
     }
 
@@ -57,11 +57,11 @@ export default function AuthPage() {
     setIsLoading(false);
 
     if (error) {
-      toast.error('Login Failed', { description: error.message });
+      toast.error('Falha no login', { description: error.message });
       return;
     }
 
-    toast.success('Welcome back!');
+    toast.success('Bem-vindo de volta!');
     // Navigation will happen via useEffect in App.tsx based on role
   };
 
@@ -76,7 +76,7 @@ export default function AuthPage() {
     });
     
     if (!validation.success) {
-      toast.error('Validation Error', { description: validation.error.errors[0].message });
+      toast.error('Erro de validacao', { description: validation.error.errors[0].message });
       return;
     }
 
@@ -86,14 +86,14 @@ export default function AuthPage() {
 
     if (error) {
       if (error.message.includes('already registered')) {
-        toast.error('Account exists', { description: 'This email is already registered. Please log in.' });
+        toast.error('Conta existente', { description: 'Este email ja esta cadastrado. Faca login.' });
       } else {
-        toast.error('Signup Failed', { description: error.message });
+        toast.error('Falha no cadastro', { description: error.message });
       }
       return;
     }
 
-    toast.success('Account created!', { description: 'You are now logged in.' });
+    toast.success('Conta criada!', { description: 'Voce ja esta conectado.' });
   };
 
   const fillDemoCredentials = (email: string, password: string) => {
@@ -116,27 +116,27 @@ export default function AuthPage() {
         
         <div className="space-y-6">
           <h1 className="text-4xl font-bold text-primary-foreground leading-tight">
-            Smart Fleet Management<br />for Modern Logistics
+            Gestao inteligente de frotas<br />para logistica moderna
           </h1>
           <p className="text-primary-foreground/80 text-lg max-w-md">
-            Real-time tracking, route optimization, and delivery management - 
-            all in one powerful platform designed for your team's success.
+            Rastreamento em tempo real, otimizacao de rotas e gestao de entregas -
+            tudo em uma plataforma poderosa criada para o sucesso da sua equipe.
           </p>
           
           <div className="flex items-center gap-6 pt-4">
             <div className="flex items-center gap-2 text-primary-foreground/80">
               <Shield className="w-5 h-5" />
-              <span className="text-sm">Privacy-First</span>
+              <span className="text-sm">Privacidade em primeiro lugar</span>
             </div>
             <div className="flex items-center gap-2 text-primary-foreground/80">
               <Eye className="w-5 h-5" />
-              <span className="text-sm">Transparent Tracking</span>
+              <span className="text-sm">Rastreamento transparente</span>
             </div>
           </div>
         </div>
         
         <p className="text-primary-foreground/60 text-sm">
-          © 2024 FleetTrack Pro. Built for operational excellence.
+          (c) 2024 FleetTrack Pro. Feito para excelencia operacional.
         </p>
       </div>
 
@@ -152,16 +152,16 @@ export default function AuthPage() {
 
           <Tabs defaultValue="login" className="w-full">
             <TabsList className="grid w-full grid-cols-2 mb-6">
-              <TabsTrigger value="login">Login</TabsTrigger>
-              <TabsTrigger value="signup">Sign Up</TabsTrigger>
+              <TabsTrigger value="login">Entrar</TabsTrigger>
+              <TabsTrigger value="signup">Cadastrar</TabsTrigger>
             </TabsList>
 
             <TabsContent value="login">
               <Card>
                 <CardHeader>
-                  <CardTitle>Welcome back</CardTitle>
+                  <CardTitle>Bem-vindo de volta</CardTitle>
                   <CardDescription>
-                    Enter your credentials to access your dashboard
+                    Digite suas credenciais para acessar seu painel
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -178,7 +178,7 @@ export default function AuthPage() {
                       />
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="login-password">Password</Label>
+                      <Label htmlFor="login-password">Senha</Label>
                       <Input
                         id="login-password"
                         type="password"
@@ -189,13 +189,13 @@ export default function AuthPage() {
                       />
                     </div>
                     <Button type="submit" className="w-full" disabled={isLoading}>
-                      {isLoading ? 'Signing in...' : 'Sign In'}
+                      {isLoading ? 'Entrando...' : 'Entrar'}
                     </Button>
                   </form>
 
                   {/* Demo accounts */}
                   <div className="mt-6 pt-6 border-t">
-                    <p className="text-sm text-muted-foreground mb-3">Demo accounts:</p>
+                    <p className="text-sm text-muted-foreground mb-3">Contas demo:</p>
                     <div className="space-y-2">
                       {demoAccounts.map((acc) => (
                         <button
@@ -217,15 +217,15 @@ export default function AuthPage() {
             <TabsContent value="signup">
               <Card>
                 <CardHeader>
-                  <CardTitle>Create an account</CardTitle>
+                  <CardTitle>Criar uma conta</CardTitle>
                   <CardDescription>
-                    Get started with FleetTrack Pro
+                    Comece a usar o FleetTrack Pro
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
                   <form onSubmit={handleSignup} className="space-y-4">
                     <div className="space-y-2">
-                      <Label htmlFor="signup-name">Full Name</Label>
+                      <Label htmlFor="signup-name">Nome completo</Label>
                       <Input
                         id="signup-name"
                         type="text"
@@ -247,7 +247,7 @@ export default function AuthPage() {
                       />
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="signup-password">Password</Label>
+                      <Label htmlFor="signup-password">Senha</Label>
                       <Input
                         id="signup-password"
                         type="password"
@@ -258,19 +258,19 @@ export default function AuthPage() {
                       />
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="signup-role">Role</Label>
+                      <Label htmlFor="signup-role">Funcao</Label>
                       <Select value={signupRole} onValueChange={(v) => setSignupRole(v as 'manager' | 'driver')}>
                         <SelectTrigger>
                           <SelectValue />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="driver">Driver</SelectItem>
-                          <SelectItem value="manager">Manager</SelectItem>
+                          <SelectItem value="driver">Motorista</SelectItem>
+                          <SelectItem value="manager">Gerente</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
                     <Button type="submit" className="w-full" disabled={isLoading}>
-                      {isLoading ? 'Creating account...' : 'Create Account'}
+                      {isLoading ? 'Criando conta...' : 'Criar conta'}
                     </Button>
                   </form>
                 </CardContent>
@@ -280,7 +280,7 @@ export default function AuthPage() {
 
           <p className="text-center text-sm text-muted-foreground mt-6">
             <Link to="/transparency" className="hover:underline">
-              What We Track & Why →
+              O que monitoramos e por que -{'>'}
             </Link>
           </p>
         </div>

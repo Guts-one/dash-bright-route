@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { StatusBadge } from '@/components/StatusBadge';
 import { FleetMap } from '@/components/FleetMap';
 import { useTrucks, useCustomers, useTruckRoute, useGpsEvents, useDeliveries } from '@/hooks/useFleetData';
-import { formatRelativeTime } from '@/lib/fleet-utils';
+import { formatIssueCategory, formatRelativeTime } from '@/lib/fleet-utils';
 import { 
   ArrowLeft, Truck, Gauge, Fuel, Calendar, MapPin, 
   Package, Clock, AlertTriangle, Navigation, User
@@ -46,11 +46,11 @@ export default function TruckDetailPage() {
       <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="text-center">
           <Truck className="w-12 h-12 mx-auto mb-4 text-muted-foreground" />
-          <h2 className="text-xl font-semibold mb-2">Truck not found</h2>
+          <h2 className="text-xl font-semibold mb-2">Caminhao nao encontrado</h2>
           <Button asChild>
             <Link to={role === 'manager' ? '/dashboard' : '/driver'}>
               <ArrowLeft className="w-4 h-4 mr-2" />
-              Back to Dashboard
+              Voltar ao painel
             </Link>
           </Button>
         </div>
@@ -96,7 +96,7 @@ export default function TruckDetailPage() {
                 <CardContent className="pt-4">
                   <div className="flex items-center gap-2 text-muted-foreground mb-1">
                     <Gauge className="w-4 h-4" />
-                    <span className="text-xs">Odometer</span>
+                    <span className="text-xs">Hodometro</span>
                   </div>
                   <p className="text-xl font-bold">{truck.odometer_km.toLocaleString()} km</p>
                 </CardContent>
@@ -105,7 +105,7 @@ export default function TruckDetailPage() {
                 <CardContent className="pt-4">
                   <div className="flex items-center gap-2 text-muted-foreground mb-1">
                     <Fuel className="w-4 h-4" />
-                    <span className="text-xs">Fuel Used</span>
+                    <span className="text-xs">Combustivel usado</span>
                   </div>
                   <p className="text-xl font-bold">{truck.fuel_used_l.toLocaleString()} L</p>
                 </CardContent>
@@ -114,7 +114,7 @@ export default function TruckDetailPage() {
                 <CardContent className="pt-4">
                   <div className="flex items-center gap-2 text-muted-foreground mb-1">
                     <Navigation className="w-4 h-4" />
-                    <span className="text-xs">Speed</span>
+                    <span className="text-xs">Velocidade</span>
                   </div>
                   <p className="text-xl font-bold">{Math.round(truck.last_speed || 0)} km/h</p>
                 </CardContent>
@@ -123,7 +123,7 @@ export default function TruckDetailPage() {
                 <CardContent className="pt-4">
                   <div className="flex items-center gap-2 text-muted-foreground mb-1">
                     <Clock className="w-4 h-4" />
-                    <span className="text-xs">Last Update</span>
+                    <span className="text-xs">Ultima atualizacao</span>
                   </div>
                   <p className="text-xl font-bold">
                     {truck.last_update_ts ? formatRelativeTime(truck.last_update_ts) : '—'}
@@ -137,7 +137,7 @@ export default function TruckDetailPage() {
               <CardHeader className="pb-2">
                 <CardTitle className="text-base flex items-center gap-2">
                   <MapPin className="w-4 h-4 text-primary" />
-                  Route & Location
+                  Rota e localizacao
                 </CardTitle>
               </CardHeader>
               <CardContent>
@@ -151,10 +151,10 @@ export default function TruckDetailPage() {
                 />
                 <div className="flex items-center gap-6 mt-4 text-xs text-muted-foreground">
                   <span className="flex items-center gap-2">
-                    <span className="w-3 h-0.5 bg-[#0d9488]" /> Actual path
+                    <span className="w-3 h-0.5 bg-[#0d9488]" /> Rota real
                   </span>
                   <span className="flex items-center gap-2">
-                    <span className="w-3 h-0.5 bg-[#3b82f6] border-dashed" style={{ borderStyle: 'dashed', borderWidth: '1px 0' }} /> Planned route
+                    <span className="w-3 h-0.5 bg-[#3b82f6] border-dashed" style={{ borderStyle: 'dashed', borderWidth: '1px 0' }} /> Rota planejada
                   </span>
                 </div>
               </CardContent>
@@ -165,7 +165,7 @@ export default function TruckDetailPage() {
               <CardHeader className="pb-2">
                 <CardTitle className="text-base flex items-center gap-2">
                   <Clock className="w-4 h-4 text-primary" />
-                  GPS Timeline
+                  Linha do tempo do GPS
                 </CardTitle>
               </CardHeader>
               <CardContent>
@@ -192,7 +192,7 @@ export default function TruckDetailPage() {
                       ))
                     ) : (
                       <p className="text-center text-muted-foreground py-8">
-                        No GPS events recorded
+                        Nenhum evento de GPS registrado
                       </p>
                     )}
                   </div>
@@ -207,7 +207,7 @@ export default function TruckDetailPage() {
               <CardHeader className="pb-2">
                 <CardTitle className="text-base flex items-center gap-2">
                   <Package className="w-4 h-4 text-primary" />
-                  Today's Deliveries
+                  Entregas de hoje
                   {deliveries && (
                     <span className="ml-auto text-sm font-normal text-muted-foreground">
                       {deliveries.filter(d => d.status === 'completed').length}/{deliveries.length}
@@ -233,10 +233,10 @@ export default function TruckDetailPage() {
                           <div className="flex items-start justify-between mb-2">
                             <div>
                               <p className="font-medium text-sm">
-                                {delivery.customer?.name || 'Unknown'}
+                                {delivery.customer?.name || 'Desconhecido'}
                               </p>
                               <p className="text-xs text-muted-foreground">
-                                Stop #{delivery.stop_order}
+                                Parada #{delivery.stop_order}
                               </p>
                             </div>
                             <StatusBadge status={delivery.status} type="delivery" size="sm" />
@@ -244,7 +244,7 @@ export default function TruckDetailPage() {
                           
                           {delivery.signature_url && (
                             <div className="mt-2 p-2 bg-background rounded border">
-                              <p className="text-xs text-muted-foreground mb-1">Signature:</p>
+                              <p className="text-xs text-muted-foreground mb-1">Assinatura:</p>
                               <img 
                                 src={delivery.signature_url} 
                                 alt="Signature" 
@@ -256,7 +256,7 @@ export default function TruckDetailPage() {
                           {delivery.issue_category && (
                             <div className="mt-2 flex items-center gap-1 text-xs text-destructive">
                               <AlertTriangle className="w-3 h-3" />
-                              {delivery.issue_category.replace('_', ' ')}
+                              {formatIssueCategory(delivery.issue_category)}
                               {delivery.issue_notes && (
                                 <span className="text-muted-foreground ml-1">
                                   - {delivery.issue_notes}
@@ -274,7 +274,7 @@ export default function TruckDetailPage() {
                       ))
                     ) : (
                       <p className="text-center text-muted-foreground py-8">
-                        No deliveries scheduled
+                        Nenhuma entrega programada
                       </p>
                     )}
                   </div>
